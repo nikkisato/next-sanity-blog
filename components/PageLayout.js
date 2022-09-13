@@ -1,0 +1,22 @@
+import { Container } from 'react-bootstrap';
+import NavBar from "./NavBar"
+
+function PageLayout({ children, className }) {
+return (
+  <Container>
+    <NavBar />
+    <div class={`page-wrapper className`}>
+      { children }
+    </div>
+    <footer className="page-footer">
+        <div>
+          <a href="#">courses</a>{' | '}
+          <a href="#">github</a>{' | '}
+          <a href="#">facebook</a>
+        </div>
+      </footer>
+  </Container>  
+)
+}
+
+export default PageLayout
