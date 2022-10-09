@@ -3,6 +3,7 @@ import PageLayout from 'components/PageLayout';
 import AuthorIntro from 'components/AuthorIntro';
 import CardListItem from 'components/CardListItem';
 import CardItem from 'components/CardItem';
+
 import { getAllBlogs } from 'lib/api';
 
 export default function Home({ blogs }) {
@@ -36,7 +37,27 @@ export async function getStaticProps() {
   const blogs = await getAllBlogs();
   return {
     props: {
-      blogs 
+      blogs,
     }
   }
 }
+
+export async function getServerSide() {
+  const blogs = await getAllBlogs();
+  return {
+    props: {
+      blogs,
+    }
+  }
+}
+
+// Static Page
+// Faster, can be cached using CDN
+// Created at build time
+// When we making the request we are always receiving the same html document
+
+
+
+// Dynamic Page
+// Created at request time (we can fetch data on server)
+// Little bit slower, the time depends on data you are fetching
