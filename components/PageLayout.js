@@ -5,7 +5,7 @@ function PageLayout({ children, className }) {
 return (
   <Container>
     <NavBar />
-    <div class={`page-wrapper className`}>
+    <div className={`page-wrapper className`}>
       { children }
     </div>
     <footer className="page-footer">

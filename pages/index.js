@@ -7,6 +7,7 @@ import CardItem from 'components/CardItem';
 import { getAllBlogs } from 'lib/api';
 
 export default function Home({ blogs }) {
+  console.log("blogs", blogs)
 
 return(
   <PageLayout>
@@ -20,9 +21,12 @@ return(
     {blogs.map(blog => (  
       <Col md="4" key={blog.slug}>
         <CardItem 
-        title={blog.title}
-        subtitle={blog.subtitle}
-        slug={blog.slug} />
+          author={blog.author}
+          title={blog.title}
+          subtitle={blog.subtitle}
+          date={blog.date}
+          image={blog.coverImage}
+         />
       </Col>))}
     
     </Row>
