@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { Card } from 'react-bootstrap';
+import Link from "next/link"
 
-function CardItem({ title, subtitle, image, date, author }) {
-    console.log(author)
+function CardItem({ title, subtitle, image, date, author, slug, link }) {
 return (
     <Card className={`ns-card`}>
         <div className="card-body-wrapper">
@@ -30,9 +30,13 @@ return (
             <Card.Text>{subtitle}</Card.Text>
         </Card.Body>
         </div>
-        <a className="card-button">
-        Read More
-        </a>
+        { link &&
+            <Link {...link}>
+            <a className="card-button">
+                Read More
+            </a>
+            </Link>
+        }
     </Card>
   )
 }

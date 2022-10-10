@@ -7,7 +7,6 @@ import CardItem from 'components/CardItem';
 import { getAllBlogs } from 'lib/api';
 
 export default function Home({ blogs }) {
-  console.log("blogs", blogs)
 
 return(
   <PageLayout>
@@ -26,6 +25,11 @@ return(
           subtitle={blog.subtitle}
           date={blog.date}
           image={blog.coverImage}
+          slug={blog.slug}
+          link={{
+            href: '/blogs/[slug]',
+            as: `/blogs/${blog.slug}`
+          }}
          />
       </Col>))}
     
