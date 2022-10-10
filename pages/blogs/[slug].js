@@ -1,6 +1,6 @@
 import PageLayout from "components/PageLayout";
 import { useRouter } from "next/router"
-import { getBlogBySlug } from "lib/api"
+import { getBlogBySlug, getAllBlogs } from "lib/api"
 
 const BlogDetail = ({ blog }) => { 
     console.log("Displaying Page")
@@ -20,19 +20,15 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
+    const blogs = await getAllBlogs();
+    const paths = blogs?.map((blog) => {
+        return {
+            params: {slug: blog.slug}
+        }
+    })
     console.log("Getting paths for every page")
     return {
-        paths:[
-            {
-                params: {slug: "my-second-blog"}
-            },
-            {
-                params: {slug: "my-first-blog"}
-            },
-            {
-                params: {slug: "my-third-blog"}
-            },
-        ],
+        paths,
         fallback: false
     }
 }
