@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Card } from 'react-bootstrap';
 import Link from "next/link"
+import { urlFor } from "lib/api"
 
 function CardItem({ title, subtitle, image, date, author, slug, link }) {
 return (
@@ -21,7 +22,7 @@ return (
         </Card.Header>
         <div className="view overlay">
             <Card.Img
-            src={image}
+            src={urlFor(image).height(300).url()}
             alt="Card image cap"
             />
         </div>
