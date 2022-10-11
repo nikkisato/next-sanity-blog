@@ -1,21 +1,18 @@
 import { useEffect, useState } from "react";
-import { Row, Col, Button} from 'react-bootstrap';
+import { Row, Button} from 'react-bootstrap';
 import PageLayout from 'components/PageLayout';
 import AuthorIntro from 'components/AuthorIntro';
-import CardListItem from 'components/CardListItem';
-import CardItem from 'components/CardItem';
 import FilteringMenu from 'components/FilteringMenu';
 
 import { getAllBlogs } from 'lib/api';
 import { useGetBlogsPages } from "actions/pagination"
 
 
-export default function Home({blogs}) {
+export default function Home({ blogs }) {
   console.log(blogs);
   const [filter, setFilter] = useState({
-    view: {
-      list: 0 
-    }
+    view: { list: 0 },
+    date: { asc: 0 }
   })
 
 // loadMore: to load more data from
@@ -28,7 +25,6 @@ const {
     isReachingEnd, 
     loadMore } = useGetBlogsPages({ blogs, filter });
 
-console.log(blogs)
 return(
   <PageLayout>
     <AuthorIntro />
