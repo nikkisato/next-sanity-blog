@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useSWR from 'swr'
 import { Row, Col} from 'react-bootstrap';
 import PageLayout from 'components/PageLayout';
 import AuthorIntro from 'components/AuthorIntro';
@@ -8,17 +7,17 @@ import CardItem from 'components/CardItem';
 import FilteringMenu from 'components/FilteringMenu';
 
 import { getAllBlogs } from 'lib/api';
+import { useGetBlogs } from 'actions';
 
-const fetcher = url => fetch(url).then(res => res.json())
 
-export default function Home({ blogs }) {
+export default function Home({blogs: initialData}) {
   const [filter, setFilter] = useState({
     view: {
       list: 0 
     }
   })
-
-  const { data, error } = useSWR('/api/hello', fetcher);
+  
+  const { data: blogs, error } = useGetBlogs(initialData);
 
 return(
   <PageLayout>
@@ -61,40 +60,16 @@ return(
          />
       </Col> 
       ))}
-    
     </Row>
   </PageLayout>
   )
 }
 
-// This function is called during the build (build time)
-// Provides props to your page
-// It will create static page
 export async function getStaticProps() {
-  const blogs = await getAllBlogs();
+  const blogs = await getAllBlogs({offset: 0});
   return {
     props: {
-      blogs,
+      blogs
     }
   }
 }
-
-export async function getServerSide() {
-  const blogs = await getAllBlogs();
-  return {
-    props: {
-      blogs,
-    }
-  }
-}
-
-// Static Page
-// Faster, can be cached using CDN
-// Created at build time
-// When we making the request we are always receiving the same html document
-
-
-
-// Dynamic Page
-// Created at request time (we can fetch data on server)
-// Little bit slower, the time depends on data you are fetching
