@@ -1,16 +1,25 @@
+import { useState } from "react";
 import { Row, Col} from 'react-bootstrap';
 import PageLayout from 'components/PageLayout';
 import AuthorIntro from 'components/AuthorIntro';
 import CardListItem from 'components/CardListItem';
 import CardItem from 'components/CardItem';
+import FilteringMenu from 'components/FilteringMenu';
 
 import { getAllBlogs } from 'lib/api';
 
 export default function Home({ blogs }) {
+  const [filter, setFilter] = useState({
+    view: {
+      list: 1 
+    }
+  })
 
 return(
   <PageLayout>
     <AuthorIntro />
+    <FilteringMenu
+      onChange={() => {alert("Alert from Index")}} />
     <hr/>
     <Row className="mb-5">
       {/* <Col md="10">
@@ -18,6 +27,11 @@ return(
       </Col> */}
 
     {blogs.map(blog => (  
+      filter.view.list ?
+        <Col md="9">
+          <CardListItem />
+        </Col>
+      :
       <Col md="4" key={blog.slug}>
         <CardItem 
           author={blog.author}
@@ -31,7 +45,8 @@ return(
             as: `/blogs/${blog.slug}`
           }}
          />
-      </Col>))}
+      </Col> 
+      ))}
     
     </Row>
   </PageLayout>
