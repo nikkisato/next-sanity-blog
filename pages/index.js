@@ -7,18 +7,19 @@ import CardItem from 'components/CardItem';
 import FilteringMenu from 'components/FilteringMenu';
 
 import { getAllBlogs } from 'lib/api';
-import { useGetBlogs } from 'actions';
+import { useGetBlogsPages } from "actions/pagination"
 
 
-export default function Home({blogs: initialData}) {
+export default function Home({blogs}) {
+  console.log(blogs);
   const [filter, setFilter] = useState({
     view: {
       list: 0 
     }
   })
-  
-  const { data: blogs, error } = useGetBlogs(initialData);
 
+  const { pages, isLoadingMore, isReachingEnd, loadMore } = useGetBlogsPages({ blogs, filter });
+console.log(blogs)
 return(
   <PageLayout>
     <AuthorIntro />
@@ -30,36 +31,7 @@ return(
     />
     <hr/>
     <Row className="mb-5">
-
-    {blogs.map(blog => (  
-      filter.view.list ?
-        <Col md="9" key={`${blog.slug}-list`}>
-          <CardListItem
-            author={blog.author}
-            title={blog.title}
-            subtitle={blog.subtitle}
-            date={blog.date}
-            link={{
-              href: '/blogs/[slug]',
-              as: `/blogs/${blog.slug}`
-            }}
-          /> 
-        </Col>
-      :
-      <Col md="4" key={blog.slug}>
-        <CardItem 
-          author={blog.author}
-          title={blog.title}
-          subtitle={blog.subtitle}
-          date={blog.date}
-          image={blog?.coverImage}
-          link={{
-            href: '/blogs/[slug]',
-            as: `/blogs/${blog.slug}`
-          }}
-         />
-      </Col> 
-      ))}
+      { pages }
     </Row>
   </PageLayout>
   )
