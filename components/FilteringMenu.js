@@ -1,9 +1,8 @@
-const FilteringMenu = ({ onChange}) => {
+const FilteringMenu = ({ onChange, filter}) => {
 return (
     <div className="filtering-menu mb-2">
         <div onClick={() => {
-            alert("clicking")
-            onChange()
+            onChange("view", { list: +!filter.view.list })
         }}>
             Change View
         </div>
