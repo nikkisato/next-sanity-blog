@@ -17,7 +17,7 @@ const serializers = {
         return (
           <div className={`blog-image blog-image-${position}`} >
            <img src={urlFor(asset).height(300).fit('max').url()} />
-            <div class="image-alt">{alt}</div>
+            <div className="image-alt">{alt}</div>
           </div>
         )
       }

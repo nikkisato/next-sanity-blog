@@ -26,14 +26,20 @@ return(
     />
     <hr/>
     <Row className="mb-5">
-      {/* <Col md="10">
-        <CardListItem />
-      </Col> */}
 
     {blogs.map(blog => (  
       filter.view.list ?
         <Col md="9" key={`${blog.slug}-list`}>
-          <CardListItem />
+          <CardListItem
+            author={blog.author}
+            title={blog.title}
+            subtitle={blog.subtitle}
+            date={blog.date}
+            link={{
+              href: '/blogs/[slug]',
+              as: `/blogs/${blog.slug}`
+            }}
+          /> 
         </Col>
       :
       <Col md="4" key={blog.slug}>
@@ -42,8 +48,7 @@ return(
           title={blog.title}
           subtitle={blog.subtitle}
           date={blog.date}
-          image={blog.coverImage}
-          slug={blog.slug}
+          image={blog?.coverImage}
           link={{
             href: '/blogs/[slug]',
             as: `/blogs/${blog.slug}`

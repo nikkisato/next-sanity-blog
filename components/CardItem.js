@@ -22,11 +22,13 @@ return (
         </Card.Header>
         <div className="view overlay">
             <Card.Img
-            src={urlFor(image)
+            src={
+            urlFor(image)
                 .height(300)
                 .crop("center")
                 .fit('clip')
-                .url()}
+                .url()
+            }
             alt="Card image cap"
             />
         </div>
