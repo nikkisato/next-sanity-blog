@@ -8,10 +8,11 @@ import CardListItem from 'components/CardListItem';
  export const useGetBlogsPages = ({ blogs: initialData, filter }) => {
     return useSWRPages('index-page',
         ({ offset, withSWR }) => { 
-            const { data: blogs } = withSWR(useGetBlogs({offset}));
+            let initialData = !offset && blogs;
+            const { data: paginatedBlogs } = withSWR(useGetBlogs({offset}, initialData));
 
-            if (!blogs) {return "Loading..."}
-            return (blogs.map(blog => (  
+            if (!paginatedBlogs) {return "Loading..."}
+            return (paginatedBlogs.map(blog => (  
                 filter.view.list ?
                 <Col md="9" key={`${blog.slug}-list`}>
                 <CardListItem
