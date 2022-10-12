@@ -6,11 +6,12 @@ import CardItem from 'components/CardItem';
 import CardListItem from 'components/CardListItem';
 import { useEffect } from 'react';
 import CardItemBlank from 'components/CardItemBlank';
+import CardListItemBlank from 'components/CardListItemBlank';
 
  export const useGetBlogsPages = ({ blogs, filter }) => {
 
     useEffect(() => {
-        window.__paginiation__init = true;
+        window.__pagination__init = true;
     },[]);
 
 
@@ -18,7 +19,7 @@ import CardItemBlank from 'components/CardItemBlank';
         ({ offset, withSWR }) => { 
             let initialData = !offset && blogs;
 
-            if (typeof window !== "undefined" && window.__paginiation__init ) {
+            if (typeof window !== "undefined" && window.__pagination__init ) {
                 initialData = null;
             }
             const { data: paginatedBlogs } = withSWR(useGetBlogs({offset, filter}, initialData));
@@ -27,9 +28,14 @@ import CardItemBlank from 'components/CardItemBlank';
                 return Array(3)
                     .fill(0)
                     .map((_, i) => {
-                        <Col key={i} md="4">
-                        <CardItemBlank />
-                    </Col>
+                        filter.view.list ?
+                        <Col key={`${i}-list`} md="9">
+                            <CardListItemBlank />
+                        </Col>
+                        :
+                        <Col key={`${i}-item`} md="4">
+                            <CardItemBlank />
+                        </Col>
                     });   
             }
 
@@ -71,7 +77,7 @@ import CardItemBlank from 'components/CardItemBlank';
             if (SWR.data && SWR.data.length === 0) {
                 return null;
             }
-            return (index + 1 )* 3;
+            return (index + 1 )* 6;
         },
         [filter]
     )
