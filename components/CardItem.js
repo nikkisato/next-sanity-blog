@@ -6,7 +6,7 @@ import { urlFor } from "lib/api"
 function CardItem({ title, subtitle, image, date, author, slug, link, mode = "normal" }) {
 return (
     <Card className={`ns-card ${mode}`}>
-        <div className="card-body-wrapper">
+        <div className={`card-body-wrapper ${!image ? "no-image" : ""} `}>
         <Card.Header
             className="d-flex flex-row">
             <img
@@ -32,7 +32,9 @@ return (
         </Card.Header>
         <div className="view overlay">
             { mode === "placeholder" ? 
-                <div className="image-placeholder" /> :
+                <div className="image-placeholder" /> 
+                :
+              image ?
                 <Card.Img
                 src={
                 urlFor(image)
@@ -43,6 +45,10 @@ return (
                 }
                 alt="Card image cap"
             />
+            : 
+                <div>
+                    
+                </div>
             }
         </div>
         <Card.Body>

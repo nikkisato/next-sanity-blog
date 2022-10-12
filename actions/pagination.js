@@ -7,6 +7,7 @@ import CardListItem from 'components/CardListItem';
 import { useEffect } from 'react';
 import CardItemBlank from 'components/CardItemBlank';
 import CardListItemBlank from 'components/CardListItemBlank';
+import moment from "moment"
 
  export const useGetBlogsPages = ({ blogs, filter }) => {
 
@@ -46,7 +47,7 @@ import CardListItemBlank from 'components/CardListItemBlank';
                     author={blog.author}
                     title={blog.title}
                     subtitle={blog.subtitle}
-                    date={blog.date}
+                    date={moment(blog.date).format("LLL")}
                     link={{
                     href: '/blogs/[slug]',
                     as: `/blogs/${blog.slug}`
