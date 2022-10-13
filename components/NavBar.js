@@ -1,17 +1,17 @@
 import { Navbar, Nav } from 'react-bootstrap';
 import Link from "next/link";
-import { useTheme } from "providers/ThemeProvider";
 
-const NavBar = () => {
-  const { theme, toggleTheme } = useTheme();
+const NavBar = ({ theme, toggleTheme }) => {
+ 
   return (
     <Navbar
+        variant={theme.type}
         className="ns-navbar ns-nav-base"
         bg="transparent"
         expand="lg" >
         <Navbar.Brand className="ns-navbar-brand">
           <Link href="/">
-            <a>Nikki Sato</a>
+            <a style={{ color: theme.fontColor }}>Nikki Sato</a>
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
