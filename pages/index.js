@@ -9,7 +9,6 @@ import { useGetBlogsPages } from "actions/pagination"
 
 
 export default function Home({ blogs }) {
-  console.log(blogs);
   const [filter, setFilter] = useState({
     view: { list: 0 },
     date: { asc: 0 }
