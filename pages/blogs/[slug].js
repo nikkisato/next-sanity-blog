@@ -47,7 +47,7 @@ const BlogDetail = ({blog, preview}) => {
   )
 }
 
-export async function getStaticProps({params}) {
+export async function getStaticProps({params, preview = false, previewData}) {
   const blog = await getBlogBySlug(params.slug, preview);
   return {
     props: { blog, preview }
