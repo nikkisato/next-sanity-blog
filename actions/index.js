@@ -12,3 +12,8 @@ export const useGetBlogs = ({offset, filter}, initialData) => {
         fallbackData: initialData
     })
 }
+
+
+export const getBlogs = (url) => {
+    return fetcher(url)};
+  

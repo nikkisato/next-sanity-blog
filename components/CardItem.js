@@ -62,7 +62,7 @@ return (
                   title.length > 40 ?
                     subtitle.substr(0, 40) + '...' : title}</Card.Title>
                 <Card.Text>{
-                  subtitle.length > 40 ?
+                  subtitle?.length > 40 ?
                     subtitle.substr(0, 40) + '...' : subtitle}</Card.Text>
             </>               
         }
