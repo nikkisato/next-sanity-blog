@@ -39,8 +39,6 @@ return (
                 src={
                 urlFor(image)
                     .height(300)
-                    .crop("center")
-                    .fit('clip')
                     .url()
                 }
                 alt="Card image cap"
@@ -60,8 +58,12 @@ return (
             </>
             :
             <>
-                <Card.Title className="card-main-title">{title}</Card.Title>
-                <Card.Text>{subtitle}</Card.Text>
+                <Card.Title className="card-main-title">{
+                  title.length > 40 ?
+                    subtitle.substr(0, 40) + '...' : title}</Card.Title>
+                <Card.Text>{
+                  subtitle.length > 40 ?
+                    subtitle.substr(0, 40) + '...' : subtitle}</Card.Text>
             </>               
         }
         </Card.Body>
