@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import Navbar from './Navbar';
+import Navbar from './NavBar';
 import { useTheme } from 'providers/ThemeProvider';
 
 export default function PageLayout({children, className}) {
